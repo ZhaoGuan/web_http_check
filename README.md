@@ -6,3 +6,7 @@ docker run -p 8050:8050 scrapinghub/splash
 
 
  mitmdump -p 8899 -s proxy_run.py
+ 
+ scrapy crawl web
+ 
+ scrapy crawl web -a source=test
