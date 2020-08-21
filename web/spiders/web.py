@@ -90,7 +90,3 @@ class WebSpider(scrapy.Spider):
 
     def net_page(self, response):
         pass
-
-
-if __name__ == "__main__":
-    print(url_data("test"))

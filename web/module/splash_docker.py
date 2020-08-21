@@ -11,18 +11,20 @@ class DockerSplash:
         self.port = port
         self.proxy_port = proxy_port
         self.docker_id = None
+        self.proxy_ip = "192.168.100.27"
+        # self.proxy_ip = "192.168.84.168"
 
     def run(self):
         try:
             docker_id = self.docker.containers.run(self.image,
                                                    environment={
-                                                       "HTTP_PROXY": "http://192.168.100.27:{}".format(
+                                                       "HTTP_PROXY": "http://" + self.proxy_ip + ":{}".format(
                                                            str(self.proxy_port)),
-                                                       "HTTPS_PROXY": "http://192.168.100.27:{}".format(
+                                                       "HTTPS_PROXY": "http://" + self.proxy_ip + ":{}".format(
                                                            str(self.proxy_port)),
-                                                       "http_proxy": "http://192.168.100.27:{}".format(
+                                                       "http_proxy": "http://" + self.proxy_ip + ":{}".format(
                                                            str(self.proxy_port)),
-                                                       "https_proxy": "http://192.168.100.27:{}".format(
+                                                       "https_proxy": "http://" + self.proxy_ip + ":{}".format(
                                                            str(self.proxy_port))
                                                    },
                                                    ports={"8050": str(self.port)},
