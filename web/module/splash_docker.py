@@ -11,8 +11,9 @@ class DockerSplash:
         self.port = port
         self.proxy_port = proxy_port
         self.docker_id = None
+        # 本机局网ip
         self.proxy_ip = "192.168.100.27"
-        # self.proxy_ip = "192.168.84.168"
+        # self.proxy_ip = "192.168.83.113"
 
     def run(self):
         try:
