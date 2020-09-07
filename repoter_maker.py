@@ -61,6 +61,69 @@ template = '''
 
 </html>
 '''
+template = '''
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Http Check Report</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    
+    <style>
+        table {
+            margin: 0 auto;
+        }
+
+        .danger {
+            color: #d9534f;
+        }
+        /* body {
+            width: 80%;
+            margin: 0 auto;
+        } */
+    </style>
+</head>
+
+<body >
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>信息</th>
+            <th>数量</th>
+        </tr>
+        {% for info in info_list %}
+        <tr>
+            <td>{{info.name}}</td>
+            <td>{{info.count}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <!-- <details> -->
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>url</th>
+                <th>响应结果</th>
+                <th>响应体大小kb</th>
+                <th>响应时间MS</th>
+            </tr>
+
+            {% for data in data_list %}
+            <tr>
+                <td>
+                    <a href={{data.url}}>{{data.url}}</a>
+                </td>
+                <td>{{data.status}}</td>
+                <td>{{data.size}}</td>
+                <td>{{data.time}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    <!-- </details> -->
+</body>
+
+</html>
+'''
 PATH = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -77,6 +140,7 @@ def make_report():
             data_result.append(row)
             url_count += 1
             status = row["status"]
+            row["time"] = int(row["time"])
             spend_time = row["time"]
             if int(spend_time) > 1000:
                 time_out_count += 1
@@ -95,6 +159,7 @@ def make_report():
             is_danger = ""
         info_list.append({"name": "请求状态码为" + k + "的数量", "count": v, "class": is_danger})
     report = Template(template)
+    data_result = list(sorted(data_result, key=lambda e: e.__getitem__('time'), reverse=True))
     result = report.render(data_list=data_result, info_list=info_list)
     with open("report.html", "w") as f:
         f.write(result)
