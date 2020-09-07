@@ -7,62 +7,6 @@ import csv
 
 template = '''
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Http Check Report</title>
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap-theme.min.css" rel="stylesheet">
-    <style>
-        table{
-            margin: 0 auto;
-        }
-        .danger {
-            color: #d9534f;
-        }
-    </style>
-</head>
-
-<body>
-    <table class="table table-bordered table-hover">
-        <tr>
-            <th>信息</th>
-            <th>数量</th>
-        </tr>
-        {% for info in info_list %}
-        <tr>
-            <td>{{info.name}}</td>
-            <td  class="{{ info.class }}">{{info.count}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <details>
-        <table class="table table-bordered table-hover">
-            <tr>
-                <th>url</th>
-                <th>响应结果</th>
-                <th>响应体大小kb</th>
-                <th>响应时间MS</th>
-            </tr>
-
-            {% for data in data_list %}
-            <tr >
-                <td>
-                    {{data.url}}
-                </td>
-                <td>{{data.status}}</td>
-                <td>{{data.size}}</td>
-                <td>{{data.time}}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </details>
-</body>
-
-</html>
-'''
-template = '''
-<!DOCTYPE html>
 <html lang="zh">
 
 <head>
