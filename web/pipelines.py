@@ -15,7 +15,7 @@ from web.settings import mitmproxy_port
 from repoter_maker import make_report
 
 PATH = os.path.dirname(os.path.abspath(__file__))
-cmd = 'mitmdump -p ' + str(mitmproxy_port) + ' -s ' + PATH + '/../proxy_run.py'
+cmd = 'mitmproxy -p ' + str(mitmproxy_port) + ' -s ' + PATH + '/../proxy_run.py'
 
 
 class WebPipeline:
